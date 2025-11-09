@@ -23,7 +23,7 @@ data "aws_ami" "frontend" {
 resource "aws_launch_template" "frontend" {
   name                   = "frontend-terraform"
   description             = "frontend-terraform"
-  image_id                = data.aws_ami.frontend.id
+  image_id                = var.ami
   instance_type           = "t3.micro"
   vpc_security_group_ids  = [aws_security_group.frontend-server-sg.id]
   key_name                = aws_key_pair.terraform_keypair.key_name
@@ -56,7 +56,7 @@ data "aws_ami" "backend" {
 resource "aws_launch_template" "backend" {
   name                   = "backend-terraform"
   description             = "backend-terraform"
-  image_id                = data.aws_ami.backend.id
+  image_id                = var.ami
   instance_type           = "t3.micro"
   vpc_security_group_ids  = [aws_security_group.backend-server-sg.id]
   key_name                = aws_key_pair.terraform_keypair.key_name
